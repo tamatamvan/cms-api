@@ -4,6 +4,7 @@ const dataController = require('../controllers/dataController');
 
 /* GET users listing. */
 router.get('/', dataController.getAllData);
+router.get('/:id', dataController.getDataById);
 router.post('/search_letter/', dataController.getDataByLetter);
 router.post('/search_frequency/', dataController.getDataByFreq);
 router.post('/', dataController.createNewData);

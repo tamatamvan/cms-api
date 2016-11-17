@@ -4,6 +4,7 @@ const dataDateController = require('../controllers/dataDateController');
 
 /* GET users listing. */
 router.get('/', dataDateController.getAllDataDate);
+router.get('/:id', dataDateController.getDataDateById);
 router.post('/search_date/', dataDateController.getDataDateByDate);
 router.post('/search_frequency/', dataDateController.getDataDateByFreq);
 router.post('/', dataDateController.createNewDataDate);

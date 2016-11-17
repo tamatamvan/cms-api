@@ -98,6 +98,28 @@ var app = new Vue({
         console.log(error);
       })
     },
+    setmodeldata: function(id) {
+      axios.get('http://localhost:3000/api/data/'+id, {})
+      .then(function(response){
+        console.log(response);
+        app.letter = response.data.letter,
+        app.frequency = response.data.frequency
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    },
+    setmodeldatadate: function(id) {
+      axios.get('http://localhost:3000/api/datadate/'+id, {})
+      .then(function(response){
+        console.log(response);
+        app.date = response.data.date,
+        app.frequency = response.data.frequency
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    },
     editData: function(id) {
       axios.put('http://localhost:3000/api/data/'+id, {
         letter: app.letter,
@@ -111,7 +133,7 @@ var app = new Vue({
       })
     },
     editDataDate: function(id) {
-      axios.put('http://localhost:3000/api/data/'+id, {
+      axios.put('http://localhost:3000/api/datadate/'+id, {
         date: app.date,
         frequency: app.frequency
       })

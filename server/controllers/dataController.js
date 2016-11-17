@@ -10,6 +10,18 @@ let getAllData  = (req, res, next) => {
   })
 }
 
+let getDataById  = (req, res, next) => {
+  Datas.findOne({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(data);
+    }
+  })
+}
+
 let getDataByLetter  = (req, res, next) => {
   Datas.find({
     letter: req.body.letter
@@ -69,6 +81,7 @@ let deleteDataById  = (req, res, next) => {
 
 module.exports = {
   getAllData,
+  getDataById,
   getDataByFreq,
   getDataByLetter,
   createNewData,

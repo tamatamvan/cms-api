@@ -9,7 +9,17 @@ let getAllDataDate  = (req, res, next) => {
     }
   })
 }
-
+let getDataDateById  = (req, res, next) => {
+  DataDates.findOne({
+    _id: req.params.id
+  }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(data);
+    }
+  })
+}
 let getDataDateByDate  = (req, res, next) => {
   DataDates.find({
     date: req.body.date
@@ -69,6 +79,7 @@ let deleteDataDateById  = (req, res, next) => {
 
 module.exports = {
   getAllDataDate,
+  getDataDateById,
   getDataDateByFreq,
   getDataDateByDate,
   createNewDataDate,

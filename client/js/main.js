@@ -132,7 +132,7 @@ var app = new Vue({
       })
     },
     deleteDataDate: function(id) {
-      axios.delete('http://localhost:3000/api/data/'+id, {})
+      axios.delete('http://localhost:3000/api/datadate/'+id, {})
       .then(function(response) {
         app.getAllDataDate()
       })

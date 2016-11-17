@@ -12,7 +12,7 @@ let getAllDataDate  = (req, res, next) => {
 
 let getDataDateByDate  = (req, res, next) => {
   DataDates.find({
-    date: req.params.date
+    date: req.body.date
   }, (err, datas) => {
     if (err) {
       console.log(err);
@@ -23,7 +23,7 @@ let getDataDateByDate  = (req, res, next) => {
 }
 let getDataDateByFreq  = (req, res, next) => {
   DataDates.find({
-    frequency: req.params.frequency
+    frequency: req.body.frequency
   }, (err, datas) => {
     if (err) {
       console.log(err);

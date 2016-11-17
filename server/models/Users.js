@@ -7,9 +7,6 @@ let usersSchema = new mongoose.Schema({
   email: String,
   username: String,
   password: String
-},
-{
-  timestamps: true
 })
 
 usersSchema.plugin(passportLocalMongoose);

@@ -5,14 +5,26 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
 
 const app = express();
 
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://127.0.0.1/cms-api', (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Database connected!');
+  }
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

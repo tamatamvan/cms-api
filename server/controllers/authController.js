@@ -2,8 +2,8 @@
 const Users = require('../models/Users');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const jwt = require('jsonwebtoken');
-const ejwt = require('express-jwt');
+let jwt = require('jsonwebtoken');
+let ejwt = require('express-jwt');
 
 let register = (req, res, next) => {
   Users.register({
@@ -21,14 +21,32 @@ let register = (req, res, next) => {
     }
   })
 }
+let login = (req, res, next) => {
+  Users.authenticate('local', {}, (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const token = jwt.sign({
+        // id: user._id,
+        username: user.username,
+        name: user.name,
+        email: user.email
+      }, 'secretlalala', {expiresIn : 60 * 60});
+      res.json({
+        token: token
+      })
+    }
+  })(req, res, next)
+}
+
 // let login = (req, res, next) => {
-//   Users.authenticate('local', {}, (err, user) => {
+//   passport.authenticate('local', {}, (err, user) => {
 //     if (err) {
-//       console.log('Ini error' + err);
+//       console.log(err);
 //     } else {
 //       const token = jwt.sign({
-//         id: user._id,
 //         username: user.username,
+//         id: user._id,
 //         name: user.name,
 //         email: user.email
 //       }, 'secretlalala', {expiresIn : 60 * 60});
@@ -38,25 +56,6 @@ let register = (req, res, next) => {
 //     }
 //   })(req, res, next)
 // }
-
-let login = (req, res, next) => {
-  passport.authenticate('local', {}, (err, user) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const token = jwt.sign({
-        username: user.username,
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      }, 'secretlalala', {expiresIn : 60 * 60});
-      res.json({
-        token: token
-      })
-    }
-
-  })(req, res, next)
-}
 
 module.exports = {
   register,

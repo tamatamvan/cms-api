@@ -13,7 +13,7 @@ let register = (req, res, next) => {
   }, req.body.password, (err, user) => {
     if (err) {
       console.log(err);
-      res.send(err, { alert: 'Oh, snap! Your regisration was unsuccessfull!'})
+      // res.send(err, { alert: 'Oh, snap! Your regisration was unsuccessfull!'})
     } else {
       passport.authenticate('local')(req, res, () => {
         res.status(200).json(user);
@@ -32,7 +32,7 @@ let login = (req, res, next) => {
         id: user._id,
         name: user.name,
         email: user.email
-      }, 'secret', {expiresIn : 60 * 60});
+      }, 'secretlalala', {expiresIn : 60 * 60});
       res.json({
         token: token
       })
@@ -42,6 +42,6 @@ let login = (req, res, next) => {
 }
 
 module.exports = {
-  register: register,
-  login: login
+  register,
+  login
 }

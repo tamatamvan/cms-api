@@ -9,7 +9,13 @@ var app = new Vue({
     frequency: '',
     searchletter: '',
     searchdate: '',
-    searchfrequency: ''
+    searchfrequency: '',
+    name: '',
+    username:'',
+    email: '',
+    password: '',
+    regstat: false,
+
   },
   methods: {
     getAllData: function() {
@@ -37,6 +43,7 @@ var app = new Vue({
       })
       .then(function (response) {
         app.datas.push(response.data);
+        app.clearModel()
       })
       .catch(function(error) {
         console.log(error);
@@ -49,6 +56,7 @@ var app = new Vue({
       })
       .then(function (response) {
         app.datadates.push(response.data);
+        app.clearModel();
       })
       .catch(function(error) {
         console.log(error);
@@ -60,6 +68,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.datas = response.data;
+        app.clearModel();
       })
       .catch(function(error) {
         console.log(error);
@@ -71,6 +80,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.datadates = response.data;
+        app.clearModel();
       })
       .catch(function(error) {
         console.log(error);
@@ -82,6 +92,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.datas = response.data;
+        app.clearModel();
       })
       .catch(function(error) {
         console.log(error);
@@ -93,6 +104,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.datadates = response.data;
+        app.clearModel();
       })
       .catch(function(error) {
         console.log(error);
@@ -127,6 +139,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.getAllData();
+        app.clearModel();
       })
       .catch(function() {
         console.log(error);
@@ -139,6 +152,7 @@ var app = new Vue({
       })
       .then(function(response) {
         app.getAllDataDate()
+        app.clearModel();
       })
       .catch(function() {
         console.log(error);
@@ -161,6 +175,79 @@ var app = new Vue({
       .catch(function() {
         console.log(error);
       })
+    },
+    register: function() {
+      axios.post('http://localhost:3000/auth/register', {
+        name: app.name,
+        username: app.username,
+        email: app.email,
+        password: app.password
+      })
+      .then(function(response) {
+        alert('Your registration was successful!')
+        // app.regstat = true
+        app.clearModel()
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    },
+    // login: function() {
+    //   axios.post('http://localhost:3000/auth/login', {
+    //     username: app.username,
+    //     password: app.password
+    //   })
+    //   .then(function(response) {
+    //     if (response.data.username != undefined) {
+    //       console.log(JSON.stringify(response));
+    //       localStorage.setItem('authenticated', true)
+    //       localStorage.setItem('token', response.data.token)
+    //       localStorage.setItem('ses_username', response.data.username)
+    //       localStorage.setItem('ses_name', response.data.name)
+    //       localStorage.setItem('ses_ava', response.data.avatar_url)
+    //       app.checkAuth()
+    //       app.clearModel()
+    //     } else {
+    //       app.auth_failed=true;
+    //     }
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   })
+    // },
+    // logout: function() {
+    //   localStorage.removeItem('token')
+    //   localStorage.removeItem('ses_username')
+    //   localStorage.removeItem('ses_name')
+    //   localStorage.removeItem('ses_ava')
+    //   localStorage.removeItem('authenticated')
+    //
+    //   app.authenticated = false;
+    //   app.ses_name = '';
+    //   app.ses_username = '';
+    //   app.ses_ava = '';
+    //   app.token = '';
+    // },
+    // checkAuth: function() {
+    //   app.authenticated = localStorage.getItem('authenticated')
+    //   app.token = localStorage.getItem('token')
+    //   app.ses_username = localStorage.getItem('ses_username')
+    //   app.ses_name = localStorage.getItem('ses_name')
+    //   app.ses_ava = localStorage.getItem('ses_ava')
+    // },
+    // falseregstat: function() {
+    //   app.regstat = false;
+    // },
+    // falseauthfailed: function() {
+    //   app.auth_failed = false;
+    // },
+    clearModel: function(){
+      app.letter= ''
+      app.date= ''
+      app.frequency= ''
+      app.searchletter= ''
+      app.searchdate= ''
+      app.searchfrequency= ''
     }
   }
 })

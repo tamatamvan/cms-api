@@ -10,7 +10,7 @@
     <div id="app">
       <!-- NAVBAR -->
       <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
               <span class="sr-only">Toggle navigation</span>
@@ -22,9 +22,7 @@
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
-            </ul>
+            <button type="button" name="button" class="btn btn-info" data-toggle="modal" data-target="#authModal">Sign Up/In</button>
           </div>
         </div>
       </nav>
@@ -111,7 +109,7 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Date" v-model="searchdate">
+                      <input type="date" class="form-control" placeholder="Date" v-model="searchdate">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" v-on:click="searchDate">Search</button>
                       </span>
@@ -270,6 +268,65 @@
             </div>
           </div>
         </div>
+
+
+        <!-- MODAL AUTH -->
+        <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Sign Up or Sign In</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#register" data-toggle="tab" aria-expanded="true">Sign up</a></li>
+                  <li class=""><a href="#login" data-toggle="tab" aria-expanded="false">Sign In</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div class="tab-pane fade active in" id="register">
+                    <div class="form-group">
+                      <label class="control-label" for="name">Name</label>
+                      <input type="text" name="name" v-model="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="email">Email</label>
+                      <input type="email" name="email" v-model="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="username">Username</label>
+                      <input type="text" name="username" v-model="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="password">Password</label>
+                      <input type="password" name="password" v-model="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Sign Up</button>
+                    </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="login">
+                    <div class="form-group">
+                      <label class="control-label" for="username">Username</label>
+                      <input type="text" name="username" v-model="username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="password">Password</label>
+                      <input type="password" name="password" v-model="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Sign in</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
       </div>
     </div>

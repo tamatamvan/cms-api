@@ -5,7 +5,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const Users = require('./models/Users');
 
@@ -17,6 +16,7 @@ const apiDataDate = require('./routes/apiDataDate');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+const cors = require('cors');
 const jwt = require('express-jwt');
 
 const app = express();
@@ -52,7 +52,7 @@ app.use(jwt({
   }
 }));
 
-passport.use(new LocalStrategy(Users.authenticate));
+passport.use(new LocalStrategy(Users.authenticate()));
 
 app.use(passport.initialize());
 app.use(passport.session());

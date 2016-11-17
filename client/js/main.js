@@ -195,6 +195,7 @@ var app = new Vue({
         app.clearModel()
       })
       .catch(function(error) {
+        app.clearModel()
         console.log(error);
       })
     },
@@ -216,6 +217,7 @@ var app = new Vue({
           app.checkAuth()
         } else {
           app.auth_failed=true;
+          app.clearModel()
         }
       })
       .catch(function(error) {
@@ -252,6 +254,10 @@ var app = new Vue({
       app.searchletter= ''
       app.searchdate= ''
       app.searchfrequency= ''
+      app.username=''
+      app.name=''
+      app.email=''
+      app.password=''
     }
   }
 })

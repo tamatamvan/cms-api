@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const routes = require('./routes/index');
-const auth = require('./routes/auth');
+// const auth = require('./routes/auth');
 const apiData = require('./routes/apiData');
 const apiDataDate = require('./routes/apiDataDate');
 
@@ -34,7 +34,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/auth', auth);
+app.use('/api/data', apiData);
+app.use('/api/datadate', apiDataDate);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

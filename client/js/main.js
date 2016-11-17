@@ -3,7 +3,7 @@ var app = new Vue({
   data: {
     datas: [],
     datadates: [],
-
+    authenticated: false,
     letter: '',
     date: '',
     frequency: '',
@@ -15,6 +15,10 @@ var app = new Vue({
     email: '',
     password: '',
     regstat: false,
+
+    ses_name: '',
+    ses_username: '',
+    ses_id: ''
 
   },
   methods: {
@@ -185,6 +189,7 @@ var app = new Vue({
       })
       .then(function(response) {
         alert('Your registration was successful!')
+        console.log(response.data);
         // app.regstat = true
         app.clearModel()
       })
@@ -192,55 +197,53 @@ var app = new Vue({
         console.log(error);
       })
     },
-    // login: function() {
-    //   axios.post('http://localhost:3000/auth/login', {
-    //     username: app.username,
-    //     password: app.password
-    //   })
-    //   .then(function(response) {
-    //     if (response.data.username != undefined) {
-    //       console.log(JSON.stringify(response));
-    //       localStorage.setItem('authenticated', true)
-    //       localStorage.setItem('token', response.data.token)
-    //       localStorage.setItem('ses_username', response.data.username)
-    //       localStorage.setItem('ses_name', response.data.name)
-    //       localStorage.setItem('ses_ava', response.data.avatar_url)
-    //       app.checkAuth()
-    //       app.clearModel()
-    //     } else {
-    //       app.auth_failed=true;
-    //     }
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   })
-    // },
-    // logout: function() {
-    //   localStorage.removeItem('token')
-    //   localStorage.removeItem('ses_username')
-    //   localStorage.removeItem('ses_name')
-    //   localStorage.removeItem('ses_ava')
-    //   localStorage.removeItem('authenticated')
-    //
-    //   app.authenticated = false;
-    //   app.ses_name = '';
-    //   app.ses_username = '';
-    //   app.ses_ava = '';
-    //   app.token = '';
-    // },
-    // checkAuth: function() {
-    //   app.authenticated = localStorage.getItem('authenticated')
-    //   app.token = localStorage.getItem('token')
-    //   app.ses_username = localStorage.getItem('ses_username')
-    //   app.ses_name = localStorage.getItem('ses_name')
-    //   app.ses_ava = localStorage.getItem('ses_ava')
-    // },
-    // falseregstat: function() {
-    //   app.regstat = false;
-    // },
-    // falseauthfailed: function() {
-    //   app.auth_failed = false;
-    // },
+    login: function() {
+      axios.post('http://localhost:3000/auth/login', {
+        username: app.username,
+        password: app.password
+      })
+      .then(function(response) {
+        if (response.data.username != undefined) {
+          console.log(JSON.stringify(response));
+          localStorage.setItem('authenticated', true)
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('ses_username', response.data.username)
+          localStorage.setItem('ses_name', response.data.name)
+          localStorage.setItem('ses_id', response.data._id)
+          // app.checkAuth()
+          app.clearModel()
+          app.checkAuth()
+        } else {
+          app.auth_failed=true;
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    },
+    logout: function() {
+      localStorage.removeItem('token')
+      localStorage.removeItem('ses_username')
+      localStorage.removeItem('ses_name')
+      localStorage.removeItem('authenticated')
+
+      app.authenticated = false;
+      app.ses_name = '';
+      app.ses_username = '';
+      app.token = '';
+    },
+    checkAuth: function() {
+      app.authenticated = localStorage.getItem('authenticated')
+      app.token = localStorage.getItem('token')
+      app.ses_username = localStorage.getItem('ses_username')
+      app.ses_name = localStorage.getItem('ses_name')
+    },
+    falseregstat: function() {
+      app.regstat = false;
+    },
+    falseauthfailed: function() {
+      app.auth_failed = false;
+    },
     clearModel: function(){
       app.letter= ''
       app.date= ''
@@ -254,3 +257,4 @@ var app = new Vue({
 
 app.getAllDataDate();
 app.getAllData();
+app.checkAuth();

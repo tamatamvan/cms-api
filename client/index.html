@@ -21,8 +21,13 @@
             <a class="navbar-brand" href="#">CMS-API</a>
           </div>
 
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <button type="button" name="button" class="btn btn-info" data-toggle="modal" data-target="#authModal">Sign Up/In</button>
+          <div class="navbar-form navbar-right">
+            <div v-if='!authenticated' class="form-group">
+              <button type="button" class="btn btn-info" name="authBtn" data-target="#authModal" data-toggle="modal"><i class="glyphicon glyphicon-user"></i> Sign Up/In</button>
+            </div>
+            <div v-if='authenticated' class="form-group">
+              <button type="button" class="btn btn-info" v-on:click="logout"><i class="glyphicon glyphicon-user"></i> Log Out</button>
+            </div>
           </div>
         </div>
       </nav>
@@ -31,7 +36,7 @@
       <br>
       <div class="container">
 
-        <div class="row">
+        <div class="row" v-if="authenticated">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#data" data-toggle="tab" aria-expanded="true">Data</a></li>
             <li class=""><a href="#datadate" data-toggle="tab" aria-expanded="false">Data Date</a></li>
@@ -303,7 +308,7 @@
                     </div>
                     <div class="form-group">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Sign Up</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal" v-on:click='register'>Sign Up</button>
                     </div>
                   </div>
 
@@ -318,7 +323,7 @@
                     </div>
                     <div class="form-group">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Sign in</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal" v-on:click="login">Sign in</button>
                     </div>
                   </div>
                 </div>

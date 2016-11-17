@@ -34,7 +34,11 @@ let login = (req, res, next) => {
         email: user.email
       }, 'secretlalala', {expiresIn : 60 * 60});
       res.json({
-        token: token
+        token: token,
+        username: user.username,
+        id: user._id,
+        name: user.name,
+        email: user.email
       })
     }
 

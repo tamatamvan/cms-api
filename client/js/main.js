@@ -4,6 +4,7 @@ var app = new Vue({
     datas: [],
     datadates: [],
     authenticated: false,
+    auth_failed: false,
     letter: '',
     date: '',
     frequency: '',
@@ -204,7 +205,7 @@ var app = new Vue({
       })
       .then(function(response) {
         if (response.data.username != undefined) {
-          console.log(JSON.stringify(response));
+          // console.log(JSON.stringify(response));
           localStorage.setItem('authenticated', true)
           localStorage.setItem('token', response.data.token)
           localStorage.setItem('ses_username', response.data.username)

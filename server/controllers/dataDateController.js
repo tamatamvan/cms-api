@@ -34,7 +34,7 @@ let getDataDateByFreq  = (req, res, next) => {
 }
 let createNewDataDate  = (req, res, next) => {
   DataDates.create({
-    letter: req.body.letter,
+    date: req.body.date,
     frequency: req.body.frequency
   }, (err, data) => {
     if (err) {

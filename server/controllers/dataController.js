@@ -12,7 +12,7 @@ let getAllData  = (req, res, next) => {
 
 let getDataByLetter  = (req, res, next) => {
   Datas.find({
-    letter: req.params.letter
+    letter: req.body.letter
   }, (err, datas) => {
     if (err) {
       console.log(err);
@@ -23,7 +23,7 @@ let getDataByLetter  = (req, res, next) => {
 }
 let getDataByFreq  = (req, res, next) => {
   Datas.find({
-    frequency: req.params.frequency
+    frequency: req.body.frequency
   }, (err, datas) => {
     if (err) {
       console.log(err);

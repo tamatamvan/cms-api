@@ -8,7 +8,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const routes = require('./routes/index');
-const users = require('./routes/users');
+const auth = require('./routes/auth');
+const apiData = require('./routes/apiData');
+const apiDataDate = require('./routes/apiDataDate');
 
 const app = express();
 
